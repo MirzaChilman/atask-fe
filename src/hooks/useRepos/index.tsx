@@ -7,7 +7,7 @@ import { repoKeywordAtom, repoUserAtom } from "@/atoms/Repo";
 const useRepos = () => {
   const keywords = useAtomValue(repoKeywordAtom);
   const [repoUser, setRepoUser] = useAtom(repoUserAtom);
-  const { data } = useQuery<Repository[]>({
+  const { isLoading } = useQuery<Repository[]>({
     queryKey: ["useRepos", keywords],
     queryFn: () => fetchRepos(keywords),
     enabled: !!keywords,
@@ -22,7 +22,7 @@ const useRepos = () => {
   });
 
   return {
-    data,
+    isLoading,
   };
 };
 

@@ -12,7 +12,6 @@ interface Props {
 
 export default function Home() {
   const { data } = useSearchUser();
-  const { data: repos } = useRepos();
   return (
     <main className="container mx-auto px-4 mb-8">
       <Form />

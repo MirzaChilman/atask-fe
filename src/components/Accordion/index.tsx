@@ -6,6 +6,7 @@ import { Accordion } from "flowbite-react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { Collapse, CollapseProps, Card } from "antd";
 import { useMemo } from "react";
+import useRepos from "@/hooks/useRepos";
 interface Props {
   items: Array<Pick<User, "id" | "login"> & { repos?: any[] }>;
 }
@@ -31,6 +32,7 @@ const test: CollapseProps["items"] = [
 const Accordions = ({ items }: Props) => {
   const setRepoKeyword = useSetAtom(repoKeywordAtom);
   const repoUser = useAtomValue(repoUserAtom);
+  const { isLoading } = useRepos();
   const formattedItems: CollapseProps["items"] = useMemo(
     () =>
       items.map((item) => {
@@ -59,10 +61,10 @@ const Accordions = ({ items }: Props) => {
         return {
           key: item.login,
           label: item.login,
-          children,
+          children: isLoading ? "Loading" : children,
         };
       }),
-    [items, repoUser]
+    [isLoading, items, repoUser]
   );
 
   const handleChange = (key: string | string[]) => {
