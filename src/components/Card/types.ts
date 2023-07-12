@@ -1,7 +1,6 @@
 export interface CardProps {
-  image: string;
-  name: string;
-  email: string;
-  phone: string;
-  site: string;
+  title: string;
+  description: string;
+  stars: number;
+  index: number;
 }

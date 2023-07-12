@@ -4,6 +4,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import { Provider } from "jotai";
 import type { AppProps } from "next/app";
 import { Noto_Sans_JP } from "next/font/google";
 import Head from "next/head";
@@ -31,17 +32,19 @@ export default function App({ Component, pageProps }: AppProps) {
       })
   );
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <Head>
-          <title>Jitera</title>
-        </Head>
-        <div className={notoSans.className}>
-          <Navbar />
-          <Component {...pageProps} />
-        </div>
-        {process.env.NEXT_PUBLIC_NODE_ENV === "dev" && <ReactQueryDevtools />}
-      </Hydrate>
-    </QueryClientProvider>
+    <Provider>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <Head>
+            <title>Jitera</title>
+          </Head>
+          <div className={notoSans.className}>
+            <Navbar />
+            <Component {...pageProps} />
+          </div>
+          {process.env.NEXT_PUBLIC_NODE_ENV === "dev" && <ReactQueryDevtools />}
+        </Hydrate>
+      </QueryClientProvider>
+    </Provider>
   );
 }

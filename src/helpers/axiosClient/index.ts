@@ -1,1 +1,1 @@
-export * from "./placeholderApi";
+export * from "./githubApi";
