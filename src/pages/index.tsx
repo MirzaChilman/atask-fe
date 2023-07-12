@@ -1,23 +1,22 @@
 import Form from "@/components/Form";
-import useUsers from "@/hooks/useUsers";
-import { User } from "@/hooks/useUsers/types";
+import useSearchUser from "@/hooks/useSearchUser";
+import { User } from "@/hooks/useSearchUser/types";
+import Accordions from "@/components/Accordion";
+import useRepos from "@/hooks/useRepos";
 import { useAtomValue } from "jotai";
-import { useDebounce } from "@uidotdev/usehooks";
-import { searchAtom } from "@/atoms/search";
+import { repoUserAtom } from "@/atoms/Repo";
 
 interface Props {
   dehydratedState: User[];
 }
 
 export default function Home() {
-  const { data } = useUsers();
-  const keywords = useAtomValue(searchAtom);
-  const debouncedValue = useDebounce(keywords, 1000);
+  const { data } = useSearchUser();
+  const { data: repos } = useRepos();
   return (
     <main className="container mx-auto px-4 mb-8">
-      {debouncedValue}
       <Form />
-      {JSON.stringify(data)}
+      <Accordions items={data?.items || []} />
     </main>
   );
 }

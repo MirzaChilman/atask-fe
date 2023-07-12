@@ -32,3 +32,9 @@ export interface User {
   created_at: string;
   updated_at: string;
 }
+
+export interface SearchResponse {
+  incomplete_results: boolean;
+  items: User[];
+  total_count: number;
+}
