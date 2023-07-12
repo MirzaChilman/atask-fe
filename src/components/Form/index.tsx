@@ -1,8 +1,8 @@
-import { debouncedValueAtom } from "@/atoms/search";
+import { searchAtom } from "@/atoms/search";
 import { useSetAtom } from "jotai";
 
 const Form = () => {
-  const setDebouncedValue = useSetAtom(debouncedValueAtom);
+  const setDebouncedValue = useSetAtom(searchAtom);
   return (
     <div className="mt-10">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">

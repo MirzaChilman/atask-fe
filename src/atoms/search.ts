@@ -1,8 +1,3 @@
-import atomWithDebounce from "@/helpers/atomWithDebounce";
+import { atom } from "jotai";
 
-export const {
-  isDebouncingAtom,
-  debouncedValueAtom,
-  clearTimeoutAtom,
-  currentValueAtom,
-} = atomWithDebounce("");
+export const searchAtom = atom("");
