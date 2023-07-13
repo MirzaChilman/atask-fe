@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchRepos } from "./fetch";
 import { Repository } from "./types";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { repoKeywordAtom, repoUserAtom } from "@/atoms/Repo";
 
 const useRepos = () => {

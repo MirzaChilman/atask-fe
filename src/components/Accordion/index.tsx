@@ -1,8 +1,5 @@
-"use client";
-
 import { repoKeywordAtom, repoUserAtom } from "@/atoms/Repo";
 import { User } from "@/hooks/useSearchUser/types";
-import { Accordion } from "flowbite-react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { Collapse, CollapseProps, Card } from "antd";
 import { useMemo } from "react";
@@ -10,24 +7,6 @@ import useRepos from "@/hooks/useRepos";
 interface Props {
   items: Array<Pick<User, "id" | "login"> & { repos?: any[] }>;
 }
-
-const test: CollapseProps["items"] = [
-  {
-    key: "1",
-    label: "This is panel header 1",
-    children: <p>rtest</p>,
-  },
-  {
-    key: "2",
-    label: "This is panel header 2",
-    children: <p>rtest</p>,
-  },
-  {
-    key: "3",
-    label: "This is panel header 3",
-    children: <p>rtest</p>,
-  },
-];
 
 const Accordions = ({ items }: Props) => {
   const setRepoKeyword = useSetAtom(repoKeywordAtom);
