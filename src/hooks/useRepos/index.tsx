@@ -13,14 +13,14 @@ const useRepos = () => {
   const { isLoading } = useQuery<Repository[]>({
     queryKey: ["useRepos", keywords],
     queryFn: () => fetchRepos(keywords),
-    enabled: !!data && !!keywords,
+    enabled: data?.incomplete_results === false && !!keywords,
     onSuccess: (data: Repository[]) => {
       const repoUserMap = new Map<string, Repository[]>(repoUser);
-      const existingData = repoUserMap.get(keywords) || [];
-      const combinedData = [...existingData, ...data];
 
-      repoUserMap.set(keywords, combinedData);
-      setRepoUser(repoUserMap);
+      if (!repoUserMap.has(keywords)) {
+        repoUserMap.set(keywords, data);
+        setRepoUser(repoUserMap);
+      }
     },
   });
 

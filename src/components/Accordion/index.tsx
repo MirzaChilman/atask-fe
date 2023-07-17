@@ -11,6 +11,7 @@ interface Props {
 const Accordions = ({ items }: Props) => {
   const setRepoKeyword = useSetAtom(repoKeywordAtom);
   const repoUser = useAtomValue(repoUserAtom);
+
   const { isLoading } = useRepos();
   const formattedItems: CollapseProps["items"] = useMemo(
     () =>
@@ -40,7 +41,8 @@ const Accordions = ({ items }: Props) => {
         return {
           key: item.login,
           label: item.login,
-          children: isLoading ? "Loading" : children,
+          children:
+            isLoading && !repoUser.has(item.login) ? "Loading" : children,
         };
       }),
     [isLoading, items, repoUser]
