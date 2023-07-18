@@ -7,8 +7,6 @@ import React from "react";
 const Guard = ({ children }: { children: React.ReactNode }) => {
   const { data, isError, isFetching } = useSearchUser();
 
-  console.log({ isFetching });
-
   if (isFetching) return <Loading />;
   if (!data?.items.length) return <Empty />;
   if (isError) return "isError";

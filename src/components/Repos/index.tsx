@@ -50,8 +50,6 @@ const Repos = ({ items }: Props) => {
   );
 
   const handleChange = (key: string | string[]) => {
-    console.log({ key: String(key) });
-
     setRepoKeyword(String(key));
   };
 
