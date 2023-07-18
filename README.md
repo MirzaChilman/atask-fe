@@ -17,12 +17,6 @@ There are 2 possible ways to deploy this applications.
 
 To run test coverage run `npm run test` this will run test for the whole project. please be advised that the test does not cover all the files. This test just to show case that I am capable of creating unit test
 
-## Design or Structure
-
-On the application you can see that I created 2 type of pages in nextjs, `homepage` is using SSR and `client` is using CSR, this to show case of the possible and knowledge of pattern that I have in nextjs
-
-Further inquiry feel free to contact me at mirzachilman@gmail.com
-
 ## Project Plan
 
-This proejct can be enhanced further in terms of CI/CD, lets say we can have github actions that trigger commit lint and then running unit test before deploying to GCP
+This project can be enhanced further in terms of CI/CD, lets say we can have github actions that trigger commit lint and then running unit test before deploying to GCP
