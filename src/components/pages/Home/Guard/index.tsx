@@ -1,6 +1,5 @@
 import Loading from "@/components/Card/Loading";
 import Empty from "@/components/Empty";
-import useRepos from "@/hooks/useRepos";
 import useSearchUser from "@/hooks/useSearchUser";
 import React from "react";
 

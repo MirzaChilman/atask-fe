@@ -1,7 +1,7 @@
 import Form from "@/components/Form";
 import useSearchUser from "@/hooks/useSearchUser";
 import Repos from "@/components/Repos";
-import Guard from "@/components/pages/client/Guard";
+import Guard from "@/components/pages/Home/Guard";
 
 export default function Home() {
   const { data } = useSearchUser();

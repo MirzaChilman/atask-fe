@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import axios from "axios";
-import useUsers from "..";
+import useSearchUser from "..";
 
 // jest.mock("axios", () => {
 //   return {
@@ -26,7 +26,7 @@ jest.mock("axios", () => {
   };
 });
 
-describe("useUsers", () => {
+describe("useSearchUser", () => {
   let queryClient: QueryClient;
 
   beforeEach(() => {
@@ -53,7 +53,7 @@ describe("useUsers", () => {
       data: mockUsers,
     });
 
-    const { result } = renderHook(() => useUsers(), {
+    const { result } = renderHook(() => useSearchUser(), {
       wrapper: ({ children }) => (
         <QueryClientProvider client={queryClient}>
           {children}
@@ -79,7 +79,7 @@ describe("useUsers", () => {
       data: undefined,
     });
 
-    const { result } = renderHook(() => useUsers(), {
+    const { result } = renderHook(() => useSearchUser(), {
       wrapper: ({ children }) => (
         <QueryClientProvider client={queryClient}>
           {children}
