@@ -8,7 +8,7 @@ const Guard = ({ children }: { children: React.ReactNode }) => {
 
   if (isFetching) return <Loading />;
   if (!data?.items.length) return <Empty />;
-  if (isError) return "isError";
+  if (isError) return <p>Something went wrong rendering the data</p>;
 
   return <>{children}</>;
 };

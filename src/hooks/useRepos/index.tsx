@@ -23,6 +23,9 @@ const useRepos = () => {
         setRepoUser(repoUserMap);
       }
     },
+    onError: () => {
+      console.error(`[useRepos] error fetching repos`);
+    },
   });
 
   return {

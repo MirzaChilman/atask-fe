@@ -12,6 +12,9 @@ const useSearchUser = () => {
       queryKey: ["useSearchUser", searchedKeywords],
       queryFn: () => fetchUsers(searchedKeywords),
       enabled: Boolean(searchedKeywords),
+      onError: () => {
+        console.error(`[useSearchUser] error fetching users`);
+      },
     });
 
   return {
