@@ -7,7 +7,7 @@ import { searchedKeywordsAtom } from "@/atoms/Search";
 const useSearchUser = () => {
   const searchedKeywords = useAtomValue(searchedKeywordsAtom);
 
-  const { data, isLoading, isError, refetch, isInitialLoading } =
+  const { data, isLoading, isError, refetch, isFetching } =
     useQuery<SearchResponse>({
       queryKey: ["useSearchUser", searchedKeywords],
       queryFn: () => fetchUsers(searchedKeywords),
@@ -17,7 +17,7 @@ const useSearchUser = () => {
   return {
     data,
     isLoading,
-    isInitialLoading,
+    isFetching,
     isError,
     refetch,
   };

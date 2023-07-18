@@ -1,16 +1,16 @@
 import Form from "@/components/Form";
 import useSearchUser from "@/hooks/useSearchUser";
-import Accordions from "@/components/Accordion";
+import Repos from "@/components/Repos";
 import Guard from "@/components/pages/client/Guard";
 
 export default function Home() {
-  const { data, isLoading, isInitialLoading } = useSearchUser();
+  const { data } = useSearchUser();
 
   return (
     <main className="container mx-auto px-4 mb-8">
       <Form />
       <Guard>
-        <Accordions items={data?.items || []} />
+        <Repos items={data?.items || []} />
       </Guard>
     </main>
   );

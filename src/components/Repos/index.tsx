@@ -8,11 +8,11 @@ interface Props {
   items: Array<Pick<User, "id" | "login"> & { repos?: any[] }>;
 }
 
-const Accordions = ({ items }: Props) => {
+const Repos = ({ items }: Props) => {
   const setRepoKeyword = useSetAtom(repoKeywordAtom);
   const repoUser = useAtomValue(repoUserAtom);
-
   const { isFetching } = useRepos();
+
   const formattedItems: CollapseProps["items"] = useMemo(
     () =>
       items.map((item) => {
@@ -50,10 +50,12 @@ const Accordions = ({ items }: Props) => {
   );
 
   const handleChange = (key: string | string[]) => {
+    console.log({ key: String(key) });
+
     setRepoKeyword(String(key));
   };
 
   return <Collapse items={formattedItems} accordion onChange={handleChange} />;
 };
 
-export default Accordions;
+export default Repos;
