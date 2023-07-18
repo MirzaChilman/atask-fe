@@ -4,16 +4,18 @@ import { Repository } from "./types";
 import { useAtom, useAtomValue } from "jotai";
 import { repoKeywordAtom, repoUserAtom } from "@/atoms/Repo";
 import useSearchUser from "../useSearchUser";
+import { searchedKeywordsAtom } from "@/atoms/Search";
 
 const useRepos = () => {
-  const { data } = useSearchUser();
+  const { data: searchData } = useSearchUser();
   const keywords = useAtomValue(repoKeywordAtom);
+  const searchedKeywords = useAtomValue(searchedKeywordsAtom);
   const [repoUser, setRepoUser] = useAtom(repoUserAtom);
 
-  const { isLoading } = useQuery<Repository[]>({
-    queryKey: ["useRepos", keywords],
-    queryFn: () => fetchRepos(keywords),
-    enabled: data?.incomplete_results === false && !!keywords,
+  const { isError, data, isFetching } = useQuery<Repository[]>({
+    queryKey: ["useRepos", searchedKeywords],
+    queryFn: () => fetchRepos(searchedKeywords),
+    enabled: !!searchData,
     onSuccess: (data: Repository[]) => {
       const repoUserMap = new Map<string, Repository[]>(repoUser);
 
@@ -25,7 +27,9 @@ const useRepos = () => {
   });
 
   return {
-    isLoading,
+    data,
+    isError,
+    isFetching,
   };
 };
 

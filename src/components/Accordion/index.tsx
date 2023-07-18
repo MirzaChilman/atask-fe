@@ -12,7 +12,7 @@ const Accordions = ({ items }: Props) => {
   const setRepoKeyword = useSetAtom(repoKeywordAtom);
   const repoUser = useAtomValue(repoUserAtom);
 
-  const { isLoading } = useRepos();
+  const { isFetching } = useRepos();
   const formattedItems: CollapseProps["items"] = useMemo(
     () =>
       items.map((item) => {
@@ -38,14 +38,15 @@ const Accordions = ({ items }: Props) => {
             <p>{repo.description}</p>
           </Card>
         ));
+
         return {
           key: item.login,
           label: item.login,
           children:
-            isLoading && !repoUser.has(item.login) ? "Loading" : children,
+            isFetching && !repoUser.has(item.login) ? "Loading" : children,
         };
       }),
-    [isLoading, items, repoUser]
+    [isFetching, items, repoUser]
   );
 
   const handleChange = (key: string | string[]) => {

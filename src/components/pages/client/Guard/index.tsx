@@ -1,12 +1,14 @@
 import Loading from "@/components/Card/Loading";
-import useSearchUser from "@/hooks/useSearchUser";
+import Empty from "@/components/Empty";
+import useRepos from "@/hooks/useRepos";
 import React from "react";
 
 const Guard = ({ children }: { children: React.ReactNode }) => {
-  const { data, isError, isLoading } = useSearchUser();
-  if (isLoading) return <Loading />;
+  const { data, isError, isFetching } = useRepos();
+
+  if (isFetching) return <Loading />;
+  if (!data?.length) return <Empty />;
   if (isError) return "isError";
-  if (data?.items?.length === 0) return;
 
   return <>{children}</>;
 };

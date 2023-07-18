@@ -1,17 +1,24 @@
-import { searchAtom } from "@/atoms/Search";
-import { useSetAtom } from "jotai";
+import { inputKeywordsAtom, searchedKeywordsAtom } from "@/atoms/Search";
+import { useAtom } from "jotai";
 import { Button, TextInput } from "flowbite-react";
 import useSearchUser from "@/hooks/useSearchUser";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 const Form = () => {
-  const setDebouncedValue = useSetAtom(searchAtom);
+  const [inputKeywords, setInputKeywords] = useAtom(inputKeywordsAtom);
+  const [searchedKeywords, setSearchedKeywords] = useAtom(searchedKeywordsAtom);
   const { refetch } = useSearchUser();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFetchUser = () => {
-    refetch();
+    setSearchedKeywords(inputKeywords);
   };
+
+  useEffect(() => {
+    if (Boolean(searchedKeywords)) {
+      refetch();
+    }
+  }, [refetch, searchedKeywords]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const isInputFocused = inputRef.current === document.activeElement;
@@ -29,7 +36,7 @@ const Form = () => {
             type="text"
             placeholder="Username"
             onKeyDown={handleKeyDown}
-            onChange={(e) => setDebouncedValue(e.target.value.toLowerCase())}
+            onChange={(e) => setInputKeywords(e.target.value.toLowerCase())}
             ref={inputRef}
           />
         </div>
