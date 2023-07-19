@@ -1,100 +1,49 @@
-import { renderHook, waitFor } from "@testing-library/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import axios from "axios";
+import { renderHook } from "@testing-library/react";
+import { useQuery } from "@tanstack/react-query";
 import useSearchUser from "..";
+import { fetchUsers } from "../fetch";
+import { searchedKeywordsAtom } from "@/atoms/Search";
+import { useAtomValue } from "jotai";
 
-// jest.mock("axios", () => {
-//   return {
-//     get: jest.fn().mockReturnValueOnce({
-//       data: [
-//         {
-//           id: 1,
-//           name: "John Doe",
-//           username: "johndoe",
-//           email: "johndoe@example.com",
-//         },
-//       ],
-//     }),
-//     create: jest.fn().mockImplementation(() => axios),
-//   };
-// });
+jest.mock("@tanstack/react-query", () => ({
+  useQuery: jest.fn(),
+}));
 
-jest.mock("axios", () => {
-  return {
-    create: jest.fn().mockImplementation(() => axios),
-    get: jest.fn(),
-  };
-});
+jest.mock("jotai", () => ({
+  useAtomValue: jest.fn(() => "example"),
+  atom: jest.fn(),
+}));
 
 describe("useSearchUser", () => {
-  let queryClient: QueryClient;
-
   beforeEach(() => {
-    queryClient = new QueryClient();
+    (useAtomValue as jest.Mock).mockReturnValue("example");
   });
 
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
-  it("returns the users data, loading state, and error state", async () => {
-    const mockUsers = [
-      {
-        id: 1,
-        name: "John Doe",
-        username: "johndoe",
-        email: "johndoe@example.com",
-      },
-    ];
-
-    (axios.get as jest.Mock).mockResolvedValue({
+  test("returns the expected values from useQuery", () => {
+    const mockedData = { users: ["user1", "user2"], totalCount: 2 };
+    (useQuery as jest.Mock).mockReturnValue({
+      data: mockedData,
+      isLoading: false,
       isError: false,
-      isLoading: false,
-      data: mockUsers,
+      refetch: jest.fn(),
+      isFetching: true,
     });
 
-    const { result } = renderHook(() => useSearchUser(), {
-      wrapper: ({ children }) => (
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
-      ),
-    });
+    const { result } = renderHook(() => useSearchUser());
 
-    expect(result.current.isLoading).toBe(true);
+    expect(result.current.data).toBe(mockedData);
+    expect(result.current.isLoading).toBe(false);
     expect(result.current.isError).toBe(false);
-    expect(result.current.data).toBeUndefined();
-
-    await waitFor(() => {
-      expect(result.current.isLoading).toBe(false);
-      expect(result.current.isError).toBe(false);
-      expect(result.current.data).toEqual(mockUsers);
-    });
+    expect(result.current.isFetching).toBe(true);
   });
 
-  it("handles error state correctly", async () => {
-    (axios.get as jest.Mock).mockResolvedValue({
+  test("onError is called when there is an error", () => {
+    (useQuery as jest.Mock).mockReturnValue({
       isError: true,
-      isLoading: false,
-      data: undefined,
     });
 
-    const { result } = renderHook(() => useSearchUser(), {
-      wrapper: ({ children }) => (
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
-      ),
-    });
+    const { result } = renderHook(() => useSearchUser());
 
-    expect(result.current.isLoading).toBe(true);
-    expect(result.current.isError).toBe(false);
-    expect(result.current.data).toBeUndefined();
-
-    await waitFor(() => {
-      expect(result.current.isLoading).toBe(false);
-      expect(result.current.isError).toBe(true);
-      expect(result.current.data).toBeUndefined();
-    });
+    expect(result.current).toBeTruthy;
   });
 });

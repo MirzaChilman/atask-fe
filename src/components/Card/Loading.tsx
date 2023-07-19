@@ -2,7 +2,10 @@ import { Skeleton } from "antd";
 
 const Loading = () => {
   return (
-    <div className="flex flex-col border rounded-lg bg-atask gap-4 p-4">
+    <div
+      data-testid="loading-container"
+      className="flex flex-col border rounded-lg bg-atask gap-4 p-4"
+    >
       {[1, 2, 3, 4, 5].map((idx) => {
         return (
           <Skeleton.Input
