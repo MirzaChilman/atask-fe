@@ -1,4 +1,4 @@
-name: JiteraFE
+name: AtaskFe
 
 on:
   push:
@@ -10,10 +10,10 @@ jobs:
     name: Build an Push to GCP
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: jitera-fe
+      IMAGE_NAME: atask-fe
       PROJECT_ID: general-website-390609
       REGION: asia-southeast2
-      REPO_NAME: jitera-fe
+      REPO_NAME: atask-fe
 
     steps:
     - name: Checkout
