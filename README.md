@@ -2,6 +2,8 @@
 
 This project is created by using the latest `node` and `npm` with the latest `nextjs` using page route structure.
 
+Project can be seen [here](https://atask-fe.vercel.app/)
+
 ## How to run
 
 1. Copy `.env.dev` to `.env.local` 
@@ -9,6 +11,7 @@ This project is created by using the latest `node` and `npm` with the latest `ne
 2. Run `npm run dev`
 
 ## Deploy
+
 There are 2 possible ways to deploy this applications. 
 1. Using default vercel config that executed every push on `main` branch
 2. Using GCP that executed on every push on `gcp` branch, this using github actions and it only deploy the image to GCR and Artifact Registry (to showcase my ability to build CI/CD pipeline), the github actions can be enhanced further to immediately deploy it in GCE, GKE or Cloud Run.
