@@ -6,7 +6,7 @@ Project can be seen [here](https://atask-fe.vercel.app/)
 
 ## How to run
 
-1. Copy `.env.dev` to `.env.local` 
+1. Copy `.env.dev` to `.env.local`. ps: adjust your github token 
 1. Run `npm install`
 2. Run `npm run dev`
 
