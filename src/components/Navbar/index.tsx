@@ -6,7 +6,6 @@ export const NavItems = [
   { title: "Github Personal", href: "/github/mirzachilman" },
   { title: "Github Work", href: "/github/mirza-garin" },
   { title: "Gitlab", href: "/gitlab/mirzachilman" },
-  { title: "client", href: "/client" },
 ];
 
 const Navbar = () => {
