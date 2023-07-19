@@ -44,20 +44,5 @@
     "prettier": "^2.8.8",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "fetch\\.ts$"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "fetch\\.ts$"
-    ]
   }
 }

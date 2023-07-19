@@ -8,8 +8,12 @@ const createJestConfig = nextJest({
 const config = {
   testEnvironment: "jest-environment-jsdom",
   preset: "ts-jest",
-  testPathIgnorePatterns: ["/node_modules/", "fetch\\.ts$"],
+  transform: {
+    "^.+\\.(t|j)s$": "ts-jest",
+  },
+  coverageDirectory: "../coverage",
   coveragePathIgnorePatterns: ["/node_modules/", "fetch\\.ts$"],
+  testPathIgnorePatterns: ["/node_modules/", "fetch\\.ts$"],
 };
 
 export default createJestConfig(config);
