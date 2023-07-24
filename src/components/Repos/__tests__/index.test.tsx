@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "jotai";
-import Repos from "@/components/Repos"; // replace with your actual path
+import Repos from "@/components/Repos";
 
 describe("Repos Component", () => {
   it("renders without crashing", () => {
